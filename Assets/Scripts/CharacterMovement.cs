@@ -20,6 +20,8 @@ public class CharacterMovement : MonoBehaviour
 
     private static bool isSprinting => Input.GetKey(KeyCode.LeftShift);
 
+    public static bool isShooting => Input.GetKey(KeyCode.Mouse0);
+
     private static Vector2 InputMovement => new(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
     private static Vector2 InputRotation => new(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
 

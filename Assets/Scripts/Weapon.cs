@@ -14,6 +14,24 @@ public class Weapon : MonoBehaviour
     private float timer;
     private static float Delta(uint value) => 60f / value;
 
+    private void Start()
+    {
+        cd = Delta(rpm);
+        timer = cd;
+        currentMag = mag;
+    }
+
+    private void Update()
+    {
+        timer += Time.deltaTime;
+        if (CharacterMovement.isShooting && timer >= cd && currentMag > 0)
+        {
+            Shoot();
+            timer = 0;
+            currentMag--;
+        }
+    }
+
     private void Shoot()
     {
         GameObject go = Instantiate(bulletPF, spawnPos.position, spawnPos.rotation);
