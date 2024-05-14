@@ -2,17 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class We : MonoBehaviour
+public class Weapon : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField] private Transform spawnPos;
+    [SerializeField] private GameObject bulletPF;
+    [SerializeField] private uint mag;
+    [SerializeField] private uint rpm;
 
-    // Update is called once per frame
-    void Update()
+    private uint currentMag;
+    private float cd;
+    private float timer;
+    private static float Delta(uint value) => 60f / value;
+
+    private void Shoot()
     {
-        
+        GameObject go = Instantiate(bulletPF, spawnPos.position, spawnPos.rotation);
+        go.GetComponent<Rigidbody>().AddForce(spawnPos.forward * 100, ForceMode.Impulse);
     }
 }
