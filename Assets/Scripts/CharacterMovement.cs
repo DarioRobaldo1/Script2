@@ -24,7 +24,7 @@ public class CharacterMovement : MonoBehaviour
 
     public static bool hasReloaded => Input.GetKey(KeyCode.R);
 
-    private static Vector2 InputMovement => new(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+    private static Vector2 InputMovement => new(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
     private static Vector2 InputRotation => new(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
 
     private Vector3 MovementVector => ((transform.right * InputMovement.x) + (transform.forward * InputMovement.y)).normalized;
