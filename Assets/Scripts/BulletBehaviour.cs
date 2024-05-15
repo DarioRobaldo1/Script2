@@ -27,4 +27,13 @@ public class BulletBehaviour : MonoBehaviour
         rb.velocity = Vector3.zero;
         rb.AddForce(origin.forward * force, ForceMode.Impulse);
     }
+    private void OnCollisionEnter(Collision other)
+    {
+        GameObject otherGO = other.gameObject;
+        if (otherGO.CompareTag("Enemy"))
+        {
+            otherGO.GetComponent<EnemyBehaviour>().TakeDamage(damage);
+            gameObject.SetActive(false);
+        }
+    }
 }

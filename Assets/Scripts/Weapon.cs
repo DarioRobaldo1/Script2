@@ -31,7 +31,7 @@ public class Weapon : MonoBehaviour
     private void Update()
     {
         timer += Time.deltaTime;
-        if (CharacterMovement.isShooting && timer >= cd && currentMag > 0)
+        if (CanShoot())
         {
             Shoot();
             timer = 0;
@@ -51,7 +51,7 @@ public class Weapon : MonoBehaviour
         isReloading = false;
     }
 
-    private void Shoot()
+    public void Shoot()
     {
         GameObject currentGO = bulletQ.Dequeue();
         Rigidbody currentRB = currentGO.GetComponent<Rigidbody>();
@@ -63,7 +63,7 @@ public class Weapon : MonoBehaviour
         
     }
 
-    private void Reload()
+    public void Reload()
     {
         StartCoroutine(WaitToReload(reloadTime));
     }
@@ -84,4 +84,8 @@ public class Weapon : MonoBehaviour
 
         return null;
     }
+    private bool CanShoot() => CharacterMovement.isShooting 
+        && timer >= cd 
+        &&currentMag > 0 
+        && !isReloading;
 }
