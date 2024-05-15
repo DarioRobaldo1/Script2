@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 2261.9788, g: 2403.0784, b: 3499.8364, a: 1}
+  m_IndirectSpecularColor: {r: 2260.9495, g: 2402.2815, b: 3499.5435, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -502,6 +502,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 316165384}
+  - component: {fileID: 316165385}
   m_Layer: 0
   m_Name: SMG
   m_TagString: Untagged
@@ -525,6 +526,24 @@ Transform:
   - {fileID: 1084590882}
   m_Father: {fileID: 1887769295}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &316165385
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 316165383}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9fb29f594447d4846815a26af6fc8b5c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnPos: {fileID: 2074649424}
+  bulletPF: {fileID: 6782542478825353407, guid: 2517a553ff22acc4d936c1c371ddc1f8,
+    type: 3}
+  mag: 10
+  rpm: 200
+  reloadTime: 2
 --- !u!1 &432432459
 GameObject:
   m_ObjectHideFlags: 0
@@ -1050,13 +1069,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1887769294}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9fb29f594447d4846815a26af6fc8b5c, type: 3}
+  m_Script: {fileID: 11500000, guid: 580b7deb2532ada48a52d5a49b6e1020, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnPos: {fileID: 0}
-  bulletPF: {fileID: 0}
-  mag: 0
-  rpm: 0
+  weapon: {fileID: 316165385}
 --- !u!1 &1999911186
 GameObject:
   m_ObjectHideFlags: 0
