@@ -22,6 +22,8 @@ public class CharacterMovement : MonoBehaviour
 
     public static bool isShooting => Input.GetKey(KeyCode.Mouse0);
 
+    public static bool hasReloaded => Input.GetKey(KeyCode.R);
+
     private static Vector2 InputMovement => new(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
     private static Vector2 InputRotation => new(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
 
