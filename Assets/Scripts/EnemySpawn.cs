@@ -32,11 +32,9 @@ public class EnemySpawn : MonoBehaviour
     void SpawnEnemy()
     {
         Transform spawnPoint = spawnPoints[currentSpawnPointIndex];
-
-        Instantiate(enemyPrefab, transform.position, Quaternion.identity).target = target;
-
+        EnemyBehaviour enemy = Instantiate(enemyPrefab, spawnPoint.position, Quaternion.identity);
+        enemy.target = target;
         currentSpawnPointIndex = (currentSpawnPointIndex + 1) % spawnPoints.Count;
-
-
     }
+
 }
