@@ -542,7 +542,7 @@ MonoBehaviour:
   bulletPF: {fileID: 6782542478825353407, guid: 2517a553ff22acc4d936c1c371ddc1f8,
     type: 3}
   mag: 10
-  rpm: 200
+  rpm: 60
   reloadTime: 2
 --- !u!1 &432432459
 GameObject:

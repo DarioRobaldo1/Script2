@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Weapon : MonoBehaviour
@@ -31,16 +32,6 @@ public class Weapon : MonoBehaviour
     private void Update()
     {
         timer += Time.deltaTime;
-        if (CanShoot())
-        {
-            Shoot();
-            timer = 0;
-            currentMag--;
-        }
-        if (CharacterMovement.hasReloaded)
-        {
-            Reload();
-        }
     }
 
     private IEnumerator WaitToReload(float time)
@@ -53,6 +44,11 @@ public class Weapon : MonoBehaviour
 
     public void Shoot()
     {
+        
+        if (timer > cd && currentMag > 0)
+        {
+        timer = 0;
+        currentMag--;
         GameObject currentGO = bulletQ.Dequeue();
         Rigidbody currentRB = currentGO.GetComponent<Rigidbody>();
         currentGO.SetActive(true);
@@ -60,6 +56,8 @@ public class Weapon : MonoBehaviour
         currentRB.velocity = Vector3.zero;
         currentRB.AddForce(spawnPos.forward * 100f, ForceMode.Impulse);
         bulletQ.Enqueue(currentGO);
+            
+        }
         
     }
 
