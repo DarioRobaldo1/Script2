@@ -10,7 +10,7 @@ public class WeaponHandler : MonoBehaviour
     {
         if (CharacterMovement.isShooting)
         {
-            weapon.Shoot();
+            weapon.Shooting();
         }
         if (CharacterMovement.hasReloaded)
         {

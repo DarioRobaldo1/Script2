@@ -6,7 +6,7 @@ using UnityEngine;
 public class Weapon : MonoBehaviour
 {
     [SerializeField] private Transform spawnPos;
-    [SerializeField] private GameObject bulletPF;
+    [SerializeField] private BulletBehaviour bulletPF;
     [SerializeField] private uint mag;
     [SerializeField] private uint rpm;
     [SerializeField] private uint reloadTime;
@@ -15,7 +15,10 @@ public class Weapon : MonoBehaviour
     private float cd;
     private float timer;
     private bool isReloading;
-    private Queue<GameObject> bulletQ = new();
+    private float bulletForce = 100f;
+    private int bulletDamage = 2;
+    private Queue<BulletBehaviour> bulletQ = new();
+    
 
     private static float Delta(uint value) => 60f / value;
     private void ResetMag() => currentMag = mag;
@@ -42,19 +45,16 @@ public class Weapon : MonoBehaviour
         isReloading = false;
     }
 
-    public void Shoot()
+    public void Shooting()
     {
         
         if (timer > cd && currentMag > 0)
         {
+            Debug.Log("SH");
         timer = 0;
         currentMag--;
-        GameObject currentGO = bulletQ.Dequeue();
-        Rigidbody currentRB = currentGO.GetComponent<Rigidbody>();
-        currentGO.SetActive(true);
-        currentGO.transform.SetPositionAndRotation(spawnPos.position, spawnPos.rotation);
-        currentRB.velocity = Vector3.zero;
-        currentRB.AddForce(spawnPos.forward * 100f, ForceMode.Impulse);
+        BulletBehaviour currentGO = bulletQ.Dequeue();
+        currentGO.Shoot(spawnPos, bulletForce, bulletDamage);
         bulletQ.Enqueue(currentGO);
             
         }
@@ -66,7 +66,7 @@ public class Weapon : MonoBehaviour
         StartCoroutine(WaitToReload(reloadTime));
     }
 
-    private Queue<GameObject> PreparePool(Queue<GameObject> q, GameObject prefab, Transform pos, uint amount)
+    private void PreparePool(Queue<BulletBehaviour> q, BulletBehaviour prefab, Transform pos, uint amount)
     {
         q.Clear();
         for (int i = 0; i < amount; i++)
@@ -75,12 +75,11 @@ public class Weapon : MonoBehaviour
             q.Enqueue(bb);*/
             
             
-            GameObject go = Instantiate(prefab, pos.position, pos.rotation);
-            go.SetActive(false);
+            BulletBehaviour go = Instantiate(prefab, pos.position, pos.rotation);
             q.Enqueue(go);
         }
 
-        return null;
+        
     }
     private bool CanShoot() => CharacterMovement.isShooting 
         && timer >= cd 
